@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mud Duel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="app" id="app">
+  <div class="stage" id="stage" data-state="title">
+    <canvas id="game" role="img" aria-label="Mud Duel: throw mud at your rival across a muddy field"></canvas>
+
+    <section class="screen" id="screen-title">
+      <h1 class="title"><img src="assets/heading-logo.png" alt="Mud Duel" width="2172" height="724"></h1>
+      <p class="lede">Cover your rival in mud before they cover you. Best of three rounds wins the match.</p>
+      <button class="btn" id="btn-play">Play</button>
+      <p class="muted" id="best-title"></p>
+    </section>
+
+    <section class="screen" id="screen-howto" hidden>
+      <h2>How to play</h2>
+      <div class="howto">
+        <p>Fill your rival's mud meter to win the round. Win two rounds to win the match.</p>
+        <p><strong>Throw:</strong> press on the field, pull back and let go, like a slingshot.</p>
+        <p class="keys"><kbd>A</kbd><kbd>D</kbd> move &nbsp; <kbd>W</kbd> jump &nbsp; <kbd>S</kbd> scoop mud &nbsp; <kbd>↑</kbd><kbd>↓</kbd> aim + hold <kbd>Space</kbd> to throw</p>
+        <p class="touch-help">Use the buttons to move, jump and scoop. Drag on the field to throw.</p>
+      </div>
+      <div class="row">
+        <button class="btn" id="btn-start">Start duel</button>
+        <button class="btn ghost" id="btn-back">Back</button>
+      </div>
+    </section>
+
+    <section class="screen" id="screen-pause" hidden>
+      <h2>Paused</h2>
+      <div class="row">
+        <button class="btn" id="btn-resume">Resume</button>
+        <button class="btn ghost" id="btn-quit-pause">Quit to title</button>
+      </div>
+    </section>
+
+    <section class="screen" id="screen-over" hidden>
+      <h2 id="over-title">You win!</h2>
+      <p class="lede" id="over-text"></p>
+      <div class="row">
+        <button class="btn" id="btn-next">Next rival</button>
+        <button class="btn ghost" id="btn-quit-over">Title screen</button>
+      </div>
+    </section>
+
+    <div class="touch" aria-hidden="true">
+      <button data-k="left" tabindex="-1">◀</button>
+      <button data-k="right" tabindex="-1">▶</button>
+      <button data-k="jump" tabindex="-1">Jump</button>
+      <button data-k="scoop" tabindex="-1">Scoop</button>
+      <button data-k="pause" tabindex="-1">II</button>
+    </div>
+
+    <p class="rotate" aria-live="polite">Turn your phone sideways to play</p>
+  </div>
+</main>
+
+<script src="character.js"></script>
+<script src="visual.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

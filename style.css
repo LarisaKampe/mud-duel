@@ -1,0 +1,292 @@
+:root {
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+  --page: #e8dcc4;
+  --page-ink: #2e1d12;
+  --mud: #6b4423;
+  --mud-deep: #2e1d12;
+  --cream: #fff6dd;
+  --coat: #ffc93c;
+  --coat-deep: #c98a12;
+  --btn-fill: #fcdfbe;
+  --btn-rim: #c05716;
+  --btn-rim-light: #ca7a29;
+  --u: 1;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --page: #1d140d;
+    --page-ink: #f3e6cf;
+  }
+}
+:root[data-theme="dark"] {
+  --page: #1d140d;
+  --page-ink: #f3e6cf;
+}
+html {
+  height: 100%;
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--page);
+  color: var(--page-ink);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.app {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+.stage {
+  position: relative;
+  overflow: hidden;
+  border-radius: calc(16px * var(--u));
+  box-shadow: 0 18px 50px rgba(46, 29, 18, 0.35);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(14px * var(--u));
+  padding: calc(30px * var(--u));
+  text-align: center;
+  color: var(--cream);
+  background: radial-gradient(
+    ellipse at 50% 55%,
+    rgba(46, 29, 18, 0.72),
+    rgba(46, 29, 18, 0.88)
+  );
+  font-size: max(12px, calc(17px * var(--u)));
+}
+.screen[hidden] {
+  display: none;
+}
+
+/* The one loud element: the logo artwork */
+.title {
+  margin: 0 0 calc(6px * var(--u));
+  line-height: 0;
+}
+.title img {
+  display: block;
+  width: calc(640px * var(--u));
+  max-width: 100%;
+  height: auto;
+}
+
+h2 {
+  font-family: "Luckiest Guy", "Arial Black", sans-serif;
+  font-weight: 400;
+  font-size: calc(54px * var(--u));
+  margin: 0;
+  color: var(--coat);
+  text-shadow: 0 calc(4px * var(--u)) 0 var(--coat-deep);
+}
+.lede {
+  max-width: 34ch;
+  margin: 0;
+}
+.howto {
+  display: grid;
+  gap: calc(6px * var(--u));
+  color: #eadcc2;
+  max-width: 46ch;
+}
+.howto p {
+  margin: 0;
+  line-height: 1.5;
+}
+.touch-help {
+  display: none;
+}
+@media (pointer: coarse) {
+  .keys {
+    display: none;
+  }
+  .touch-help {
+    display: block;
+  }
+}
+kbd {
+  display: inline-block;
+  min-width: 1.8em;
+  padding: 0.05em 0.4em;
+  margin: 0 0.1em;
+  border-radius: 0.35em;
+  background: rgba(255, 246, 221, 0.14);
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.35);
+  font: inherit;
+  font-weight: 800;
+  color: var(--cream);
+}
+.muted {
+  margin: 0;
+  color: #cdb99a;
+  min-height: 1em;
+}
+.row {
+  display: flex;
+  gap: calc(12px * var(--u));
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn {
+  font:
+    800 max(14px, calc(20px * var(--u)))/1 "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+  padding: 0.8em 3.2em;
+  /* cream pebble with a burnt-orange rim, matching the button artwork */
+  border-radius: 0.65em;
+  border: calc(3.5px * var(--u)) solid transparent;
+  cursor: pointer;
+  background:
+    linear-gradient(var(--btn-fill), var(--btn-fill)) padding-box,
+    radial-gradient(
+        ellipse at center,
+        var(--btn-rim) 65%,
+        var(--btn-rim-light) 100%
+      )
+      border-box;
+  color: var(--mud-deep);
+  box-shadow:
+    0 0 calc(7px * var(--u)) rgba(0, 0, 0, 0.5),
+    inset calc(6px * var(--u)) calc(6px * var(--u)) calc(4px * var(--u))
+      rgba(255, 255, 255, 0.45),
+    inset calc(-6px * var(--u)) calc(-6px * var(--u)) calc(4px * var(--u))
+      rgba(165, 150, 132, 0.6);
+}
+.btn:active {
+  transform: translateY(2px);
+  box-shadow:
+    0 0 calc(4px * var(--u)) rgba(0, 0, 0, 0.5),
+    inset calc(-6px * var(--u)) calc(-6px * var(--u)) calc(4px * var(--u))
+      rgba(255, 255, 255, 0.35),
+    inset calc(6px * var(--u)) calc(6px * var(--u)) calc(4px * var(--u))
+      rgba(165, 150, 132, 0.6);
+}
+.btn:disabled {
+  opacity: 0.65;
+  cursor: progress;
+  transform: none;
+}
+.btn.ghost {
+  /* same pebble shape and rim, dark mud fill for the less important choice */
+  background:
+    linear-gradient(#4a2e18, #4a2e18) padding-box,
+    radial-gradient(
+        ellipse at center,
+        var(--btn-rim) 65%,
+        var(--btn-rim-light) 100%
+      )
+      border-box;
+  color: var(--cream);
+  box-shadow: 0 0 calc(7px * var(--u)) rgba(0, 0, 0, 0.5);
+}
+.btn:focus-visible {
+  outline: 3px solid var(--cream);
+  outline-offset: 4px;
+}
+
+.touch {
+  display: none;
+}
+@media (pointer: coarse) {
+  .stage[data-state="playing"] .touch {
+    display: block;
+  }
+}
+.touch button {
+  position: absolute;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+  width: calc(84px * var(--u));
+  height: calc(84px * var(--u));
+  border-radius: 50%;
+  border: 2px solid rgba(255, 246, 221, 0.5);
+  background: rgba(46, 29, 18, 0.35);
+  color: var(--cream);
+  font:
+    800 calc(22px * var(--u)) "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+  bottom: calc(18px * var(--u));
+}
+.touch button.on {
+  background: rgba(255, 201, 60, 0.5);
+}
+.touch [data-k="left"] {
+  left: calc(24px * var(--u));
+}
+.touch [data-k="right"] {
+  left: calc(120px * var(--u));
+}
+.touch [data-k="jump"] {
+  right: calc(120px * var(--u));
+}
+.touch [data-k="scoop"] {
+  right: calc(24px * var(--u));
+}
+.touch [data-k="pause"] {
+  top: calc(96px * var(--u));
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: auto;
+  width: calc(52px * var(--u));
+  height: calc(52px * var(--u));
+  font-size: calc(16px * var(--u));
+}
+
+.rotate {
+  display: none;
+}
+@media (pointer: coarse) and (orientation: portrait) {
+  .rotate {
+    display: grid;
+    place-items: center;
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 1em;
+    background: rgba(46, 29, 18, 0.92);
+    color: var(--cream);
+    text-align: center;
+    font:
+      400 22px "Luckiest Guy",
+      "Arial Black",
+      sans-serif;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn:active {
+    transform: none;
+  }
+}
